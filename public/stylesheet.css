@@ -1,14 +1,14 @@
 .card {
   float:left;
   display:inline-block;
-  height:300px;
-  width:200px;
+  height:100px;
+  width:60px;
   border: 1px solid black;
 }
 
 #prize-card, #my-played-card, #opponent-played-card {
-  height:300px;
-  width:200px;
+  height:100px;
+  width:60px;
   border: 1px solid black;
   display:block;
   float:none;
