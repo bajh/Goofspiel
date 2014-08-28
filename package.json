@@ -4,6 +4,7 @@
   "description": "Real-time goofspiel game",
   "dependencies": {
     "express": "4.8.x",
-    "socket.io": "1.0.x"
+    "socket.io": "1.0.x",
+    "ejs": "1.0.x"
   }
 }

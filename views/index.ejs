@@ -1,0 +1,84 @@
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+  <script src="/game_client.js"></script>
+  <link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+  <style>
+  <% for(var i=0; i < 13; i++) { %>
+    #card-<%= i + 1 %>{
+      background: url('card-faces.svg') -<%= 112 * i - i/3 %>px 0;
+      background-size: 1452px 625px;
+    }
+  <% } %>
+  </style>
+</head>
+
+<body>
+  <div id="game-message-panel">
+  </div>
+  
+  <div id="prize-card" class="card">
+  </div>
+
+  <div id="my-played-card" class="card">
+  </div>
+
+  <div id="opponent-played-card" class="card">
+  </div><br/>
+
+  <div class="card" id="card-1">
+    1
+  </div>
+
+  <div class="card" id="card-2">
+    2
+  </div>
+
+  <div class="card" id="card-3">
+    3
+  </div>
+
+  <div class="card" id="card-4">
+    4
+  </div>
+
+  <div class="card" id="card-5">
+    5
+  </div>
+
+  <div class="card" id="card-6">
+    6
+  </div>
+
+  <div class="card" id="card-7">
+    7
+  </div>
+
+  <div class="card" id="card-8">
+    8
+  </div>
+
+  <div class="card" id="card-9">
+    9
+  </div>
+
+  <div class="card" id="card-10">
+    10
+  </div>
+
+  <div class="card" id="card-11">
+    jack
+  </div>
+
+  <div class="card" id="card-12">
+    queen
+  </div>
+
+  <div class="card" id="card-13">
+    king
+  </div>
+</body>
+</html>

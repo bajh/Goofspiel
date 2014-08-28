@@ -1,4 +1,5 @@
 var  app = require('express')(),
+     express = require('express'),
      http = require('http').Server(app),
      io = require('socket.io')(http),
      unfilled_rooms = [],
@@ -6,13 +7,23 @@ var  app = require('express')(),
      Game = require('./game.js')
      games = {};
 
+app.use(express.static(__dirname + '/public'));
+app.set('view engine', 'ejs');
+app.set('view options', {layout: false})
+app.set("views", __dirname + "/views");
+
 app.get('/', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+  res.render('index');
 });
 
-app.get('/stylesheet.css', function(req, res){
-  res.sendFile(__dirname + '/public/stylesheet.css');
-});
+// app.get('/stylesheet.css', function(req, res){
+//   res.sendFile(__dirname + '/public/stylesheet.css');
+// });
+
+
+// app.get('/card-faces.svg', function(req, res){
+//   res.sendFile(__dirname + '/public/images/card-faces.svg');
+// });
 
 io.on('connection', function(socket){
 
