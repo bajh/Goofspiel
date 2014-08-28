@@ -56,6 +56,8 @@ function assignRoom(socket) {
     room = unfilled_rooms.pop();
     socket.join(room[0]);
     beginGame(room[0], room[1], socket);
+    game.player1.emit('assign suit', "hearts");
+    game.player2.emit('assign suit', "diamonds");
   }
   return room;
 };
