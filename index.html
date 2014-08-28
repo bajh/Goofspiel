@@ -15,9 +15,16 @@
       $('#game-message-panel').text("Game now beginning!");
     });
 
-    $('.card').on('click', function(){
-      socket.emit('card play', $(this).attr('id'));
-      $(this).remove();
+    socket.on('your turn', function(){
+      $('.card').on('click', function(){
+        socket.emit('card play', $(this).attr('id'));
+        $(this).remove();
+        $('.card').off();
+      });
+    });
+
+    socket.on('nextcard', function(card){
+      $('#prize-card').text(card);
     });
 
   });
