@@ -6,7 +6,7 @@
   border: 1px solid black;
 }
 
-#prize-card {
+#prize-card, #my-played-card, #opponent-played-card {
   height:300px;
   width:200px;
   border: 1px solid black;

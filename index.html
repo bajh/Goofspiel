@@ -15,16 +15,19 @@
       $('#game-message-panel').text("Game now beginning!");
     });
 
-    socket.on('your turn', function(){
+    socket.on('nextcard', function(card){
+      $('#prize-card').text(card);
       $('.card').on('click', function(){
         socket.emit('card play', $(this).attr('id'));
+        //It would be ideal to require confirmation from the server that the card was submitted before showing it on the client-side
+        $('#my-played-card').text($(this).attr('id'));
         $(this).remove();
         $('.card').off();
       });
     });
 
-    socket.on('nextcard', function(card){
-      $('#prize-card').text(card);
+    socket.on('opponent move', function(){
+      $('#opponent-played-card').text("X");
     });
 
   });
@@ -38,7 +41,13 @@
   <div id="prize-card">
   </div>
 
-  <div class="card" id="ace">
+  <div id="my-played-card">
+  </div>
+
+  <div id="opponent-played-card">
+  </div>
+
+  <div class="card" id="1">
     1
   </div>
 
@@ -78,15 +87,15 @@
     10
   </div>
 
-  <div class="card" id="jack">
+  <div class="card" id="11">
     jack
   </div>
 
-  <div class="card" id="queen">
+  <div class="card" id="12">
     queen
   </div>
 
-  <div class="card" id="king">
+  <div class="card" id="13">
     king
   </div>
 </body>

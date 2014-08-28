@@ -19,11 +19,11 @@ io.on('connection', function(socket){
   assignRoom(socket);
 
   socket.on('card play', function(choice){
-    console.log(choice);
+    handlePlays(socket, choice);
   });
 
   socket.on('disconnect', function(){
-    closeRoom(socket.rooms[1]);
+    closeRoom(findRoomFor(socket));
   });
 });
 
@@ -54,8 +54,23 @@ function beginGame(room, player1, player2) {
   //There should be a better way to structure this than passing in the io object
   games[room] = new Game(io, room, player1, player2);
   game = games[room];
-  game.play_round();
-};
+  game.playRound();
+}
+
+function findRoomFor(player) {
+  return player.rooms[1];
+}
+
+//May make the most sense to make this find game for a certain player
+function findGameFor(room) {
+  return games[room];
+}
+
+function handlePlays(player, choice) {
+  room = findRoomFor(player);
+  game = findGameFor(room);
+  game.cardPlayed(player, choice);
+}
 
 http.listen(3000, function() {
   console.log('listening on *:3000');
