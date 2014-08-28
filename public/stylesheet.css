@@ -1,0 +1,15 @@
+.card {
+  float:left;
+  display:inline-block;
+  height:300px;
+  width:200px;
+  border: 1px solid black;
+}
+
+#prize-card {
+  height:300px;
+  width:200px;
+  border: 1px solid black;
+  display:block;
+  float:none;
+}

@@ -1,0 +1,9 @@
+{
+  "name": "goofspiel",
+  "version": "0.0.1",
+  "description": "Real-time goofspiel game",
+  "dependencies": {
+    "express": "4.8.x",
+    "socket.io": "1.0.x"
+  }
+}
