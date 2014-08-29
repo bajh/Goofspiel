@@ -1,10 +1,13 @@
 .card {
   float:left;
   display:inline-block;
-  height:157px;
-  width:112px;
+  height:154px;
+  width:114px;
   margin:10px;
-/*  position:absolute;
+/*  -webkit-box-shadow: -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
+  -moz-box-shadow:    -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
+  box-shadow:         -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
+  position:absolute;
 */}
 
 #prize-card, #my-played-card, #opponent-played-card {

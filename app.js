@@ -16,15 +16,6 @@ app.get('/', function(req, res){
   res.render('index');
 });
 
-// app.get('/stylesheet.css', function(req, res){
-//   res.sendFile(__dirname + '/public/stylesheet.css');
-// });
-
-
-// app.get('/card-faces.svg', function(req, res){
-//   res.sendFile(__dirname + '/public/images/card-faces.svg');
-// });
-
 io.on('connection', function(socket){
 
   assignRoom(socket);
@@ -34,28 +25,41 @@ io.on('connection', function(socket){
   });
 
   socket.on('disconnect', function(){
-    closeRoom(findRoomFor(socket));
+    closeRoom(socket.room);
   });
 });
 
 function closeRoom(room) {
-  if (unfilled_rooms.indexOf(room) >= 0) {
-    unfilled_rooms.splice(unfilled_rooms.indexOf(room),1);
+  roomFromQueue = findRoomByNum(room);
+  console.log(roomFromQueue);
+  if (roomFromQueue != null) {
+    unfilled_rooms.splice(roomFromQueue[1],1);
   }
-};
+}
+
+function findRoomByNum(room) {
+  found_room = null;
+  for (var i = 0; i < unfilled_rooms.length; i++) {
+    if (unfilled_rooms[i][0] == room) {
+      found_room = i;
+    }
+  }
+  return found_room;
+}
 
 function assignRoom(socket) {
   if (unfilled_rooms.length == 0) {
     rooms += 1;
     room = 'room-' + rooms;
-    socket.join(room);
-    //Doing this so that later on I can know which sockets are in each room--there's probably a better solution
+    //Not a thing
+    channel = socket.join(room);
+    socket.room = room
     unfilled_rooms.push([room, socket]);
     socket.emit('game message', "Waiting to match you with an opponent");
   } else {
     room = unfilled_rooms.pop();
     socket.join(room[0]);
-    beginGame(room[0], room[1], socket);
+    beginGame(room[0], socket, room[1]);
     game.player1.emit('assign suit', "hearts");
     game.player2.emit('assign suit', "diamonds");
   }
