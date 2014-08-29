@@ -60,8 +60,8 @@ function assignRoom(socket) {
     room = unfilled_rooms.pop();
     socket.join(room[0]);
     beginGame(room[0], socket, room[1]);
-    game.player1.emit('assign suit', "hearts");
-    game.player2.emit('assign suit', "diamonds");
+    game.player1.emit('assign suit', "clubs");
+    game.player2.emit('assign suit', "spades");
   }
   return room;
 };
@@ -89,6 +89,7 @@ function handlePlays(player, choice) {
   game.cardPlayed(player, choice);
 }
 
+//Need to change this to use a port assigned in environment
 http.listen(3000, function() {
   console.log('listening on *:3000');
 });

@@ -1,54 +1,40 @@
   $(function(){
     var socket = io();
 
-    //Want to refactor this
+    //Want to refactor this and move it into page-behavior
     socket.on('assign suit', function(suit){
-      for (var i = 0; i < 13; i++) {
-        $card = $('<div>');
-        $card.attr('id', function() {return '#card-' + (i + 1)});
-        $card.addClass("card");
-        $card.css("background", function() {
-          background = "url('card-faces.svg') ";
-          position = i * -113;
-          if (i == 4) {position -= 2};
-          if (i == 6) {position -= 1};
-          if (i == 5) {position -= 1};
-          if (i == 11) {position -= 2};
-          background += position;
-          background += "px ";
-          if (suit == "hearts") {
-            background += "0";
-          } else if (suit == "diamonds") {
-            background += "308px";
-          }
-          return background;
-        });
-        $card.css({"background-size": "1469px 616px"});
-        $card.css("z-index", function() { return i + 1 });
-        $card.data("card-val", i + 1);
-        $('#player-hand').append($card);
+      for (var i = 1; i < 14; i++) {
+        displayCard(suit, '#player-hand', i);
       }
-
-      // if (suit == "hearts") {
-      //   for (var i = 0; i < 13; i++) {
-      //     element = $('#card-' + (i + 1));
-      //     element.css({"background": "url('card-faces.svg') " + (-113 * i) + "px 0"});
-      //     element.css({"background-size": "1469px 616px"});
-      //     element.css({"z-index": i + 1});
-      //     element.css({"left": ((i * 20) + 30) + "px"})
-      //     element.data("card-val", i + 1);
-      //   }
-      // } else {
-      //   for (var i = 0; i < 13; i++) {
-      //     element = $('#card-' + (i + 1));
-      //     element.css({"background": "url('card-faces.svg') " + (-113 * i) + "px 308px"}); 
-      //     element.css({"background-size": "1469px 616px"});
-      //     element.css({"z-index": i + 1});
-      //     element.css({"left": ((i * 20) + 30) + "px"})
-      //     element.data("card-val", i + 1);
-      //   }
-      // }
     });
+
+    function displayCard(suit, context, val) {
+      suitPositions = {
+        "clubs": "0",
+        "hearts": "154px",
+        "spades": "308px"
+      }
+      $card = $('<div>');
+      $card.attr('id', function(){ return 'card-' + val });
+      $card.addClass("card");
+      $card.css("background", function(){
+        background = "url('card-faces.svg') ";
+        position = (val - 1) * -113;
+        //Was getting a problem with the positioning with these values--hopefully will be able to figure out a more unified way to do this later:
+        if (val == 5)   { position -= 2 };
+        if (val == 6)   { position -= 1 };
+        if (val == 7)   { position -= 1 };
+        if (val == 12)  { position -= 2 };
+        background += position;
+        background += "px ";
+        background += suitPositions[suit];
+        return background;
+      });
+      $card.css({"background-size": "1469px 616px"});
+      $card.css("z-index", function(){ return val });
+      $card.data("card-val", val);
+      $(context).append($card);
+    }
 
     socket.on('game message', function(msg){
       $('#game-message-panel').text(msg);
