@@ -31,7 +31,6 @@ io.on('connection', function(socket){
 
 function closeRoom(room) {
   roomFromQueue = findRoomByNum(room);
-  console.log(roomFromQueue);
   if (roomFromQueue != null) {
     unfilled_rooms.splice(roomFromQueue[1],1);
   }
@@ -49,15 +48,19 @@ function findRoomByNum(room) {
 
 function assignRoom(socket) {
   if (unfilled_rooms.length == 0) {
+    console.log(unfilled_rooms);
     rooms += 1;
     room = 'room-' + rooms;
     //Not a thing
     channel = socket.join(room);
     socket.room = room
     unfilled_rooms.push([room, socket]);
+    console.log(unfilled_rooms)
     socket.emit('game message', "Waiting to match you with an opponent");
   } else {
+    console.log(unfilled_rooms);
     room = unfilled_rooms.pop();
+    console.log(unfilled_rooms);
     socket.join(room[0]);
     beginGame(room[0], socket, room[1]);
     game.player1.emit('assign suit', "clubs");
@@ -91,5 +94,4 @@ function handlePlays(player, choice) {
 
 //Need to change this to use a port assigned in environment
 http.listen(3000, function() {
-  console.log('listening on *:3000');
 });

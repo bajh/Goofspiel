@@ -1,14 +1,124 @@
+/* * * * * * * CSS Reset * * * * * * * */
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* * * * * * * Styling * * * * * * * */
+body {
+  background: url('background-panel.svg');
+  background-size:368px 356px;
+  background-repeat:repeat;
+  -webkit-perspective: 800px;
+}
+
+.container {
+  padding-top:20px;
+  height:100%;
+  width:1000px;
+  margin: 0 auto;
+  background-color:white;
+}
+
+#card-back {
+  background: url('card-back.svg');
+}
+
+#game-message-panel {
+  width: 600px;
+  margin: 0 auto 30px auto;
+  font-weight:700;
+  font-style: italic;
+  font-family: 'Open Sans', sans-serif;
+  font-color: rgb(0, 160, 194);
+  font-size: 26px;
+  text-align: center;
+}
+
+#logo {
+  width:349px;
+  height:162px;
+  margin: 0 auto;
+  background:url('goofspiel_logo.svg');
+  background-size:349px 162px;
+}
+
 .card {
   float:left;
   display:inline-block;
   height:154px;
   width:114px;
   margin:10px;
-/*  -webkit-box-shadow: -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
-  -moz-box-shadow:    -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
-  box-shadow:         -7px 0px 5px 0px rgba(60, 80, 119, 0.5);
-  position:absolute;
-*/}
+  }
 
-#prize-card, #my-played-card, #opponent-played-card {
+#opponent-played-card {
+  transition: -webkit-transform 1s ease-in;
+  -webkit-transform-style: preserve-3d;
+}
+
+#opponent-played-card div {
+  position:absolute;
+  -webkit-backface-visibility: hidden;
+}
+
+#opponent-played-card-back {
+  z-index: 2;
+}
+
+#opponent-played-card-front {
+  z-index: 1;
+}
+
+#player-hand, #card-play-zone, #hud {
+  display:block;
+}
+
+#card-play-zone {
+  width: 500px;
+  margin: 0 auto;
+}
+
+#player-hand {
+  clear: both;
 }

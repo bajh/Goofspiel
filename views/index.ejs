@@ -4,25 +4,43 @@
   <script src="/socket.io/socket.io.js"></script>
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="/game_client.js"></script>
-  <script src="/page-behavior.js"></script>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
 <body>
-  <div id="game-message-panel">
-  </div>
-  
-  <div id="prize-card" class="card">
-  </div>
 
-  <div id="my-played-card" class="card">
+  <div id="logo">
   </div>
+  <div class="container">
+    <div id="hud">
+      <div id="game-message-panel">
+      </div>
+      
+      <div id="card-play-zone">
+      
+        <div id="my-played-card" class="card">
+        </div>
+    
+        <div id="prize-card" class="card">
+        </div>
 
-  <div id="opponent-played-card" class="card">
-  </div><br/>
+        <div id="opponent-played-card" class="card">
+          
+          <div id="opponent-played-card-back" class="card">
+          </div>
+          
+          <div id="opponent-played-card-front" class="card">
+          </div>
+        
+        </div>
 
-  <div id="player-hand">
-  </div><br/>
+      </div>
+    </div>
+
+    <div id="player-hand">
+    </div>
+  </div>
 
 </body>
 </html>

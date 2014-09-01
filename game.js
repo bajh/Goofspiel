@@ -4,7 +4,6 @@ function shuffle(o) {
 }
 
 function Game(io, room, player1, player2) {
-  console.log('new game created');
   this.io = io;
   this.room = room;
   this.player1 = player1;
@@ -24,9 +23,8 @@ Game.prototype.nextcard = function() {
 };
 
 Game.prototype.playRound = function() {
-  console.log("playing a round");
   this.prizePile.push(this.nextcard());
-  console.log(this.prizePile);
+  console.log("Prize: " + this.prizePile);
   this.io.to(this.room).emit('nextcard', this.prizePile[this.prizePile.length - 1]);
 };
 
@@ -41,8 +39,9 @@ Game.prototype.cardPlayed = function(player, choice) {
 Game.prototype.determineScore = function() {
   this.player1.emit('reveal card', this.player2.move);
   this.player2.emit('reveal card', this.player1.move);
-  console.log(this.player1.move);
-  console.log(this.player2.move);
+  console.log("Player1 move: " + this.player1.move);
+  console.log("Player2 move: " + this.player2.move);
+  self = this;
   if (this.player1.move > this.player2.move) {
     this.player1.score += this.totalPrize;
     console.log("Player 1 won with" + this.player1.move + ". Opponent had " + this.player2.move);
@@ -53,9 +52,9 @@ Game.prototype.determineScore = function() {
     if (this.cards.length == 0) {
       this.endGame();
     };
-    this.playRound();
+    //It doesn't really feel like functions like playRound belong in determineScore
+    setTimeout(function(){self.playRound();}, 2000);
   } else if (this.player2.move > this.player1.move) {
-    console.log("Player 2 won with" + this.player2.move + ". Opponent had " + this.player1.move);
     this.player2.score += this.totalPrize;
     this.prizePile.length = 0;
     this.player2.emit('game message', "You won that prize");
@@ -63,7 +62,7 @@ Game.prototype.determineScore = function() {
     if (this.cards.length == 0) {
       this.endGame();
     };
-    this.playRound();
+    setTimeout(function(){self.playRound();}, 2000);
   } else {
     this.draw();
   }
@@ -81,14 +80,15 @@ Game.prototype.draw = function() {
   this.io.to(this.room).emit('game message', "Draw!");
   this.player1.move = false;
   this.player2.move = false;
-  this.playRound();
+  self = this;
+  setTimeout(function(){self.playRound();}, 3000);
 };
 
 Game.prototype.endGame = function() {
   if (this.player1.score > this.player2.score) {
     this.player1.emit('game message', "You win!");
     this.player2.emit('game message', "You lose");
-  } else if (player2.score > player1.score) {
+  } else if (this.player2.score > this.player1.score) {
     this.player2.emit('game message', "You win!");
     this.player1.emit('game message', "You lose");
   } else {
