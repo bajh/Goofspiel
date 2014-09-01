@@ -93,12 +93,14 @@ body {
   }
 
 #opponent-played-card {
+  position: relative;
   transition: -webkit-transform 1s ease-in;
   -webkit-transform-style: preserve-3d;
 }
 
 #opponent-played-card div {
   position:absolute;
+  top:-10px;
   -webkit-backface-visibility: hidden;
 }
 

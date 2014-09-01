@@ -65,10 +65,10 @@ $(function(){
     displayCard("diamonds", $('#prize-card'), card);
     $('#my-played-card').text('');
     $('#player-hand').on('click', '.card', function(){
-      console.log($(this).data('card-val'));
-      socket.emit('card play', $(this).data('card-val'));
+      cardValue = $(this).data('card-val');
+      socket.emit('card play', cardValue);
       //It would be ideal to require confirmation from the server that the card was submitted before showing it on the client-side
-      $('#my-played-card').text($(this).data('card-val'));
+      displayCard(mySuit, '#my-played-card', cardValue);
       $(this).remove();
       $('#player-hand').off();
     });
