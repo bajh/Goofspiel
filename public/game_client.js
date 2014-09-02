@@ -3,6 +3,11 @@ $(function(){
       mySuit,
       oppSuit;
 
+  $(document).on('click', function(){
+    $('#modal').hide();
+    $('#lightbox').remove();
+  });
+
   //Want to refactor this and move it into page-behavior
   socket.on('assign suit', function(suit){
     suits = {

@@ -61,6 +61,35 @@ body {
   background-color:white;
 }
 
+#lightbox {
+  position: fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background: rgba(0,0,0,0.5);
+}
+
+#modal {
+  position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+  text-align:center;
+  z-index:1000;
+}
+
+#modal div {
+  border-radius:10px;
+  width: 500px;
+  margin: 140px auto;
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 30px;
+  text-align: center;
+}
+
 #card-back {
   background: url('card-back.svg');
 }
@@ -117,7 +146,7 @@ body {
 }
 
 #card-play-zone {
-  width: 500px;
+  width: 420px;
   margin: 0 auto;
 }
 
