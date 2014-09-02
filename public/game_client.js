@@ -45,7 +45,6 @@ $(function(){
       "back": "-154px"
     }
     $card = $(context);
-    // $card.css({"left":(val*16)+"px"});
       $card.css("background", function(){
           background = "url('card-faces.svg') ";
           position = (val - 1) * -113;
@@ -66,6 +65,8 @@ $(function(){
   function clearCards(){
     $('#opponent-played-card-back').css('background', '');
     $('#opponent-played-card-front').css('background', '');
+    $('#opponent-played-card').css('-webkit-transform', '');
+    $('#opponent-played-card-front').css('-webkit-transform', '');
     $('#my-played-card').css('background', '');
   }
 
@@ -79,9 +80,15 @@ $(function(){
   });
 
   socket.on('nextcard', function(card){
-    console.log('next card');
-    $('#prize-card').empty();
-    displayCard("diamonds", $('#prize-card'), card);
+    for (var i = 0; i < $('.prize-card').length; i++) {
+      if (i != 0) {
+        $('.prize-card')[i].remove();
+      }
+    }
+    $('.prize-card').empty();
+    $('#opponent-played-card').css("left", "200px");
+    console.log($('.prize-card'));
+    displayCard("diamonds", $('.prize-card').last(), card);
     $('#my-played-card').text('');
     $('#player-hand').on('click', '.card', function(){
       cardValue = $(this).data('card-val');
@@ -93,7 +100,24 @@ $(function(){
     });
   });
 
-  socket.on('nextcarddraw', function(){});
+  socket.on('nextcard draw', function(card) {
+    $nextCard = $('<div>');
+    $nextCard.addClass('card');
+    $nextCard.addClass('prize-card');
+    $nextCard.css('left', ($('.prize-card').length * 11) + 140);
+    $('.prize-card').last().after($nextCard);
+    $('#opponent-played-card').css("left", "+= 10");
+    displayCard("diamonds", $nextCard, card);
+    //This is code duplication, and it's not cool!
+    $('#player-hand').on('click', '.card', function() {
+      cardValue = $(this).data('card-val');
+      socket.emit('card play', cardValue);
+      //It would be ideal to require confirmation from the server that the card was submitted before showing it on the client-side
+      displayCard(mySuit, '#my-played-card', cardValue);
+      $(this).remove();
+      $('#player-hand').off();
+    });
+  });
 
   socket.on('opponent move', function() {
     displayCard('back', '#opponent-played-card-back', 1)
@@ -102,7 +126,7 @@ $(function(){
   socket.on('reveal card', function(choice) {
     displayCard(oppSuit, '#opponent-played-card-front', choice);
     $('#opponent-played-card').animate({borderSpacing: -90},
-      {step: function(now){
+      {step: function(now) {
           $('#opponent-played-card').css('-webkit-transform','rotateY(180deg)');
           $('#opponent-played-card-front').css('-webkit-transform', 'rotateY(-180deg)')
           },

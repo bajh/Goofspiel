@@ -25,7 +25,6 @@ Game.prototype.nextcard = function() {
 Game.prototype.playRound = function(options) {
   this.prizePile.push(this.nextcard());
   console.log("Prize: " + this.prizePile);
-  console.log('nextcard' + options);
   if (options) {
     options = ' ' + options
   } else {

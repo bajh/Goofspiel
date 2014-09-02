@@ -1,6 +1,5 @@
 /* * * * * * * CSS Reset * * * * * * * */
 
-
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -104,6 +103,19 @@ body {
   font-color: rgb(0, 160, 194);
   font-size: 26px;
   text-align: center;
+}
+
+#opponent-played-card {
+  position:absolute;
+  left:60px;
+}
+
+#card-play-zone {
+  position:relative;
+}
+
+.prize-card {
+  position:absolute;
 }
 
 #logo {
