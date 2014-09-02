@@ -23,11 +23,17 @@ $(function(){
   });
 
   function layCardDivs(){
+    var rotationMultiplier = -7;
     for (i = 1; i < 14; i++) {
       $card = $('<div>');
       $card.attr('id', function(){ return 'card-' + i });
       $card.addClass("card");
       $('#player-hand').append($card);
+      $card.css('left', i * 22);
+      $card.css('-webkit-transform','rotate('+ rotationMultiplier * 3 +'deg)');
+      $card.css('-moz-transform','rotate('+ rotationMultiplier * 3 +'deg)');
+      $card.css('transform','rotate('+ rotationMultiplier * 3 +'deg)');
+      rotationMultiplier = rotationMultiplier + 1;
     }
   }
 
@@ -58,11 +64,12 @@ $(function(){
   }
 
   socket.on('game message', function(msg){
-    $('#game-message-panel').text(msg);
+    $('#game-message-panel').html('<span>' + msg + '</span>');
   });
 
   socket.on('begin game', function(){
-    $('#game-message-panel').text("Game now beginning!");
+    $('#game-message-panel').html("<span>Now starting a new game!</span>");
+    $('#game-message-panel span').fadeOut(2300, 'swing');
   });
 
   socket.on('nextcard', function(card){
@@ -95,6 +102,9 @@ $(function(){
         },
         'linear'
       );
+    setTimeout(function(){
+      //How to remove card image??
+    }, 1400);
   });
 
 });
