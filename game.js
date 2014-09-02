@@ -22,10 +22,16 @@ Game.prototype.nextcard = function() {
   return this.cards.pop();
 };
 
-Game.prototype.playRound = function() {
+Game.prototype.playRound = function(options) {
   this.prizePile.push(this.nextcard());
   console.log("Prize: " + this.prizePile);
-  this.io.to(this.room).emit('nextcard', this.prizePile[this.prizePile.length - 1]);
+  console.log('nextcard' + options);
+  if (options) {
+    options = ' ' + options
+  } else {
+    options = '';
+  }
+  this.io.to(this.room).emit('nextcard' + options, this.prizePile[this.prizePile.length - 1]);
 };
 
 Game.prototype.cardPlayed = function(player, choice) {
@@ -39,26 +45,25 @@ Game.prototype.cardPlayed = function(player, choice) {
 Game.prototype.determineScore = function() {
   this.player1.emit('reveal card', this.player2.move);
   this.player2.emit('reveal card', this.player1.move);
-  console.log("Player1 move: " + this.player1.move);
-  console.log("Player2 move: " + this.player2.move);
   self = this;
   if (this.player1.move > this.player2.move) {
-    this.player1.score += this.totalPrize;
-    console.log("Player 1 won with" + this.player1.move + ". Opponent had " + this.player2.move);
+    console.log("Player 1 won" + this.totalPrize() + "with " + this.player1.move);
+    this.player1.score += this.totalPrize();
+    this.player1.emit('game message', "You won " + this.totalPrize() + " points");
+    this.player2.emit('game message', "Your opponent won " + this.totalPrize() + " points");
     //clear the prize pile
     this.prizePile.length = 0;
-    this.player1.emit('game message', "You won that prize");
-    this.player2.emit('game message', "You lost that prize");
     if (this.cards.length == 0) {
       this.endGame();
     };
     //It doesn't really feel like functions like playRound belong in determineScore
     setTimeout(function(){self.playRound();}, 2000);
   } else if (this.player2.move > this.player1.move) {
-    this.player2.score += this.totalPrize;
+    console.log("Player 2 won " + this.totalPrize() + " with " + this.player2.move);
+    this.player2.score += this.totalPrize();
+    this.player2.emit('game message', "You won " + this.totalPrize() + " points");
+    this.player1.emit('game message', "Your opponent won " + this.totalPrize() + " points");
     this.prizePile.length = 0;
-    this.player2.emit('game message', "You won that prize");
-    this.player1.emit('game message', "You lost that prize");
     if (this.cards.length == 0) {
       this.endGame();
     };
@@ -81,7 +86,7 @@ Game.prototype.draw = function() {
   this.player1.move = false;
   this.player2.move = false;
   self = this;
-  setTimeout(function(){self.playRound();}, 3000);
+  setTimeout(function(){self.playRound('draw');}, 3000);
 };
 
 Game.prototype.endGame = function() {

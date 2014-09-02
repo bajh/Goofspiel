@@ -63,6 +63,12 @@ $(function(){
       $card.data("card-val", val);
   }
 
+  function clearCards(){
+    $('#opponent-played-card-back').css('background', '');
+    $('#opponent-played-card-front').css('background', '');
+    $('#my-played-card').css('background', '');
+  }
+
   socket.on('game message', function(msg){
     $('#game-message-panel').html('<span>' + msg + '</span>');
   });
@@ -73,6 +79,7 @@ $(function(){
   });
 
   socket.on('nextcard', function(card){
+    console.log('next card');
     $('#prize-card').empty();
     displayCard("diamonds", $('#prize-card'), card);
     $('#my-played-card').text('');
@@ -86,9 +93,10 @@ $(function(){
     });
   });
 
+  socket.on('nextcarddraw', function(){});
+
   socket.on('opponent move', function() {
     displayCard('back', '#opponent-played-card-back', 1)
-    // $('#opponent-played-card').background("url('card-back.svg')").css({"background-size": "1154px 114px"});
   });
 
   socket.on('reveal card', function(choice) {
@@ -103,8 +111,8 @@ $(function(){
         'linear'
       );
     setTimeout(function(){
-      //How to remove card image??
-    }, 1400);
+      clearCards();
+    }, 2000);
   });
 
 });
