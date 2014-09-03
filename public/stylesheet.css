@@ -58,6 +58,25 @@ body {
   width:800px;
   margin: 0 auto;
   background-color:white;
+  border: 3px solid #c0392b;
+  border-radius: 10px;
+}
+
+#rule-intro {
+  font-size: 40px;
+}
+
+#rule-intro, #okay {
+  font-family: "Oleo Script", sans-serif;
+  color:#c0392b;
+}
+
+#okay {
+  cursor:pointer;
+  border: 1px solid #c0392b;
+  border-radius:10px;
+  padding: 0 6px;
+  font-size:35px;
 }
 
 #lightbox {
@@ -82,11 +101,13 @@ body {
 #modal div {
   border-radius:10px;
   width: 500px;
-  margin: 400px auto;
+  margin: 200px auto;
   background-color: #fff;
   border: 1px solid #000;
   padding: 30px;
   text-align: center;
+  font-family: 'Istok Web', sans-serif;
+  font-size:14px;
 }
 
 #card-back {
@@ -94,15 +115,16 @@ body {
 }
 
 #game-message-panel {
-  height:60px;
+  height:40px;
   width: 600px;
-  margin: 0 auto 30px auto;
+  margin: 0 auto;
   font-weight:700;
   font-style: italic;
   font-family: 'Open Sans', sans-serif;
   font-color: rgb(0, 160, 194);
   font-size: 26px;
   text-align: center;
+  color:#c0392b;
 }
 
 #opponent-played-card {
@@ -114,6 +136,10 @@ body {
   position:relative;
 }
 
+#hud {
+  height:200px;
+}
+
 .prize-card {
   position:absolute;
 }
@@ -122,7 +148,7 @@ body {
   width:349px;
   height:162px;
   margin: 0 auto;
-  background:url('goofspiel_logo.svg');
+  background:url('goofspiel_logo2.svg');
   background-size:349px 162px;
 }
 

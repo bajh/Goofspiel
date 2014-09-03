@@ -5,6 +5,8 @@
   <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
   <script src="/game_client.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:700italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 
@@ -43,16 +45,20 @@
 
   <div id="player-hand">
   </div>
+
 </div>
 
 <div id="modal">
 
   <div id="rules">
-    <p>Rules: each player is dealt one suit--a third suit is shuffled and set aside as the prize pile. The players make secret bids for the prize cards, which are revealed one by one. The cards are valued from one to 13, with aces low.</p><br/>
+    <p><span id="rule-intro">Rules</span><br> 
+
+    Each player is dealt one suit--a third suit is shuffled and set aside as the prize pile. The players make secret bids for the prize cards, which are revealed one by one. The cards are valued from one to 13, with aces low.</p><br/>
 
     <p>After each player makes his or her bid, the player with the highest bid is awarded the card from the competition suit. In the case of a draw, the players make a second bid for the prize card, as well as the next one in the deck.</p><br/>
 
     <p>When the prize deck is empty, the player who has claimed more points from the competition suit wins.</p><br/>
+    <span id="okay">Okay!</span>
   </div>
 
 </div>

@@ -5,3 +5,10 @@
 
 -Chat
 -Being able to choose your opponent.
+
+
+- Don't start game until user confirms they understand the rules
+- "You won 1 points"
+-Showing who won for long
+-Starting a new game
+-Removing last card after game is over

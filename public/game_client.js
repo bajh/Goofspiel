@@ -3,9 +3,11 @@ $(function(){
       mySuit,
       oppSuit;
 
-  $(document).on('click', function(){
+  $('#okay').on('click', function(){
     $('#modal').hide();
     $('#lightbox').remove();
+    socket.emit('read rules');
+    $('body').off('click');
   });
 
   //Want to refactor this and move it into page-behavior
@@ -20,6 +22,7 @@ $(function(){
     for (var i = 1; i < 14; i++) {
       displayCard(suit, '#card-' + i, i);
     }
+    $('#chatform').show();
   });
 
   function layCardDivs(){
@@ -86,7 +89,7 @@ $(function(){
       }
     }
     $('.prize-card').empty();
-    $('#opponent-played-card').css("left", "200px");
+    $('#opponent-played-card').css("left", "144px");
     console.log($('.prize-card'));
     displayCard("diamonds", $('.prize-card').last(), card);
     $('#my-played-card').text('');
@@ -104,9 +107,9 @@ $(function(){
     $nextCard = $('<div>');
     $nextCard.addClass('card');
     $nextCard.addClass('prize-card');
-    $nextCard.css('left', ($('.prize-card').length * 11) + 140);
+    $nextCard.css('left', ($('.prize-card').length * 13) + 140);
     $('.prize-card').last().after($nextCard);
-    $('#opponent-played-card').css("left", "+= 10");
+    $('#opponent-played-card').css("left", "+= 15");
     displayCard("diamonds", $nextCard, card);
     //This is code duplication, and it's not cool!
     $('#player-hand').on('click', '.card', function() {
@@ -121,6 +124,17 @@ $(function(){
 
   socket.on('opponent move', function() {
     displayCard('back', '#opponent-played-card-back', 1)
+  });
+
+  socket.on('victory', function(msg) {
+    $('.prize-card').empty();
+    $('#game-message-panel').html('<span>' + msg + '</span>');
+    $('#game-message-panel span').fadeOut(2300, 'swing', function(){
+      $('#game-message-panel').html('<span>Play Again</span>').css('cursor', 'pointer').show();
+    });
+    $('#game-message-panel').on('click', function(){
+      socket.emit('replay');
+    })
   });
 
   socket.on('reveal card', function(choice) {
