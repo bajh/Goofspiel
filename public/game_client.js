@@ -134,6 +134,7 @@ $(function(){
     });
     $('#game-message-panel').on('click', function(){
       socket.emit('replay');
+      $('#game-message-panel').css('cursor', 'default');
     });
   });
 
