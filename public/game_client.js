@@ -90,7 +90,6 @@ $(function(){
     }
     $('.prize-card').empty();
     $('#opponent-played-card').css("left", "144px");
-    console.log($('.prize-card'));
     displayCard("diamonds", $('.prize-card').last(), card);
     $('#my-played-card').text('');
     $('#player-hand').on('click', '.card', function(){
@@ -126,15 +125,16 @@ $(function(){
     displayCard('back', '#opponent-played-card-back', 1)
   });
 
-  socket.on('victory', function(msg) {
+  socket.on('end game', function(msg) {
     $('.prize-card').empty();
+    $('.prize-card').css('background', '')
     $('#game-message-panel').html('<span>' + msg + '</span>');
-    $('#game-message-panel span').fadeOut(2300, 'swing', function(){
+    $('#game-message-panel span').fadeOut(3000, 'swing', function(){
       $('#game-message-panel').html('<span>Play Again</span>').css('cursor', 'pointer').show();
     });
     $('#game-message-panel').on('click', function(){
       socket.emit('replay');
-    })
+    });
   });
 
   socket.on('reveal card', function(choice) {

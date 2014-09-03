@@ -27,7 +27,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('replay', function(){
-      game = findGameFor(socket);
+      game = roomManager.findGameFor(socket);
       roomManager.beginGame(room, game.player1, game.player2);
     });
 
