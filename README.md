@@ -14,3 +14,6 @@
 -Removing last card after game is over
 
 -If you are the first person to play a card then it looks really weird when your opponent plays their card.
+
+
+-If your opponent leaves, you might want to know about that!

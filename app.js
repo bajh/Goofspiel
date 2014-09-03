@@ -1,5 +1,6 @@
 var  app = require('express')(),
      express = require('express'),
+     port = process.env.PORT || 3000,
      http = require('http').Server(app),
      io = require('socket.io')(http),
      RoomManager = require('./lib/room_manager.js'),
@@ -38,6 +39,5 @@ io.on('connection', function(socket){
 
 });
 
-//Need to change this to use a port assigned in environment for heroku deployment
-http.listen(3000, function() {
+http.listen(port, function() {
 });

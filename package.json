@@ -1,6 +1,7 @@
 {
   "name": "goofspiel",
   "version": "0.0.1",
+  "main": "app.js"
   "description": "Real-time goofspiel game",
   "dependencies": {
     "express": "4.8.x",
