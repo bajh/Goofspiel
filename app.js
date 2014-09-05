@@ -21,6 +21,8 @@ io.on('connection', function(socket){
 
   //After user has read the rules, match with opponent and attach event listeners for gameplay
   socket.on('read rules', function(){
+    console.log(roomManager.games);
+    console.log(roomManger.unmatchedSockets.length)
     roomManager.assignRoom(socket);
 
     socket.on('card play', function(choice){
@@ -33,7 +35,7 @@ io.on('connection', function(socket){
     });
 
     socket.on('disconnect', function(){
-      roomManager.removeClientFromQueue(socket);
+      roomManager.removeClient(socket);
     });
   });
 
