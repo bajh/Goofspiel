@@ -22,7 +22,7 @@ io.on('connection', function(socket){
   //After user has read the rules, match with opponent and attach event listeners for gameplay
   socket.on('read rules', function(){
     console.log(roomManager.games);
-    console.log(roomManager.unmatchedSockets.length())
+    console.log(roomManager.unmatchedSockets.length;
     roomManager.assignRoom(socket);
 
     socket.on('card play', function(choice){
