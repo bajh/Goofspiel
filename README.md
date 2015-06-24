@@ -16,4 +16,4 @@
 -If you are the first person to play a card then it looks really weird when your opponent plays their card.
 
 ------------
--If your opponent leaves, clear the cards so that they can't still play a card.
+-If your opponent leaves, clear the cards so that they can't still play a card.hallo
