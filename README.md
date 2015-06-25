@@ -19,3 +19,4 @@
 -If your opponent leaves, clear the cards so that they can't still play a card.hallo
 stuffNOT
 hi
+SomeConflictingStuff
